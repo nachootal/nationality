@@ -3,41 +3,24 @@ require "spec_helper"
 describe Nationality do
 
   context "constants" do
-    it { should have_constant(:NATIONALITY) }
+    it { should have_constant(:NATIONALITIES) }
   end
 
   context "::NATIONALITY" do
+    it "should have two locales" do
+      Nationality::NATIONALITIES.keys == 2
+    end
+=begin
+    it "should have an :en locale" do
+      I18n.locale = :en
+      Nationality::Nationality.count.should == 196
+    end
     it "should be 196" do
-      Nationality::NATIONALITY.count.should == 196
+      Nationality::NATIONALITIES[:es].length.should == 196
     end
-  end
-
-  describe "::Nationality Class" do
-
-    describe '#default_option method' do
-      context "When Nationality exists" do
-        it "should return the first option selected" do
-          expect(Nationality::Nationality.default_option('filipino')[0]).to eq("Filipino")
-        end
-      end
-
-      context "When Nationality does not exists" do
-        it "should raise NationalityNotFound error" do
-          expect { Nationality::Nationality.default_option('Jejemon') }.to raise_error( Nationality::NationalityNotFound )
-        end
-      end
+    it "should be 169" do
+      Nationality::NATIONALITIES[:en].length.should == 169
     end
-
-    describe '#count method' do
-      it 'should return total count of Nationalities' do
-        expect(Nationality::Nationality.count).to eq(196)
-      end
-    end
-  end
-
-  describe "::NationalityNotFound Error Class" do
-    it "should raise NationalityNotFound error" do
-      expect { raise Nationality::NationalityNotFound }.to raise_error( Nationality::NationalityNotFound )
-    end
+=end
   end
 end
